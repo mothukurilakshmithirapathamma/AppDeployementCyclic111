@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+  width : 1500px; 
+  height: 800px;
+  background-size: cover;
+  background-position: center;
+  background-color: blueviolet;
+  animation: animateIMG 5S infinite;
+}
+@keyframes animateIMG{
+  100%{
+    filter: hue-rotate(360deg);
+  } 
+}
+.signup{
+  display: inline-block;
+  border-radius: 20px;
+ position: relative;
+ top: 9%;
+ left: 3%;
+   background-color: gold;
+}
+
+form{
+  display: inline-block;
+ border-radius: 20px;
+position: relative;
+top: 20%;
+right: 10%;
+  background-color: antiquewhite;
+}
+.key{
+  position: relative;
+top: -5%;
+left: 9%;
+}
+
+form label{
+  display: inline-block;
+  width: 120px;
+}
+form div{
+  margin: 15px;
+
+}
+
+.profilePic{
+  width: 250px;
+  height: 150px;
+  object-fit: contain;
+
+}
+nav{
+  font-size: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

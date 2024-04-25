@@ -1,0 +1,121 @@
+import React, { useEffect } from 'react'
+import {Link} from "react-router-dom";
+import { useRef ,useState,useSelector} from 'react';
+import TopNavigation from './TopNavigation';
+
+function EditProfile() {
+
+
+    let [profilePic,setProfilePic]=useState("./images/noImage.png");
+
+    let firstNameInputRef=useRef();
+    let lastNameInputRef=useRef();
+    let ageInputRef=useRef();
+    let emailInputRef=useRef();
+    let passwordInputRef=useRef();
+    let mobileNoInputRef=useRef();
+    let profilePicInputRef=useRef();
+
+
+    let storeObj=useSelector((store)=>{
+        return store
+    });
+
+    useEffect(()=>{
+        console.log(storeObj);
+
+        firstNameInputRef.current.value=storeObj.userDetails.firstName;
+        lastNameInputRef.current.value=storeObj.userDetails.lastName;  
+         ageInputRef.current.value=storeObj.userDetails.age;
+         emailInputRef.current.value=storeObj.userDetails.email;
+         mobileNoInputRef.current.value=storeObj.userDetails.mobileNo;
+
+         setProfilePic(`http://localhost://4545/${storeObj.userDetails.profilePic}`);
+    })
+
+    
+    let updateProfileUsingFORMDATA=async()=>{
+       
+
+        let dataToSend=new FormData();
+        dataToSend.append("firstName",firstNameInputRef.current.value);
+        dataToSend.append("lastName",lastNameInputRef.current.value);
+        dataToSend.append("age",ageInputRef.current.value);
+        dataToSend.append("email",emailInputRef.current.value);
+        dataToSend.append("password",passwordInputRef.current.value);
+        dataToSend.append("mobileNo",mobileNoInputRef.current.value);
+
+        for(let i=0;i<=profilePicInputRef.current.files.length;i++){
+            dataToSend.append("profilePic",profilePicInputRef.current.files[i]);
+        }
+
+        let reqOptions={
+            method:"PATCH",
+            body:dataToSend,
+        }
+        let JSONData=await fetch("http://localhost:4545/editProfile",reqOptions);
+
+        let JSOData = await JSONData.json();
+
+        alert(JSOData.msg);
+        console.log(JSOData);
+
+    }
+
+  return (
+    <div className='App'>
+        <TopNavigation></TopNavigation>
+        <form className='signup'>
+            <h2>EditProfile</h2>
+            <div>
+                <label>First Name</label>
+                <input ref={firstNameInputRef}></input>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input ref={lastNameInputRef}></input>
+            </div>
+            <div>
+                <label>Age</label>
+                <input ref={ageInputRef}></input>
+            </div>
+            <div>
+                <label>Email</label>
+                <input ref={emailInputRef} readOnly></input>
+            </div>
+            <div>
+                <label>Password</label>
+                <input ref={passwordInputRef}></input>
+            </div>
+            <div>
+                <label>Mobile No</label>
+                <input ref={mobileNoInputRef}></input>
+            </div>
+            <div>
+                <label>Profile Pic</label>
+                <input 
+                multiple
+                type='file' ref={profilePicInputRef} onChange={(eventObj)=>{
+
+                    let selectedPicPath=URL.createObjectURL(eventObj.target.files[0]);
+                    setProfilePic(selectedPicPath);
+
+                }}></input>
+                <br></br>
+                <img alt=''className='profilePic' src={profilePic}></img>
+                <div>
+            <button type='button' onClick={()=>{
+              
+              updateProfileUsingFORMDATA();
+
+           }}>Upadtae Many</button>
+           </div>
+            </div>
+         
+           
+        </form>
+    </div>
+  )
+}
+
+export default EditProfile;
