@@ -30,7 +30,7 @@ function Login() {
           body:dataToSend,
          }
       
-         let JSONData=await fetch("http://localhost:4545/validateLogin",reqOptions);
+         let JSONData=await fetch("/validateLogin",reqOptions);
 
          let JSOData=await JSONData.json();
          if(JSOData.status==="success"){
@@ -60,7 +60,7 @@ function Login() {
       body:dataToSend
     };
 
-    let JSONData=await fetch("http://laocalhost:4545/validateLogin",reqOptions);
+    let JSONData=await fetch("/validateLogin",reqOptions);
 
     let JSOData=await JSONData.json();
 

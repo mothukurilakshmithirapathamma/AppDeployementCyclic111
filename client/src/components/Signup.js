@@ -36,7 +36,7 @@ function Signup() {
             body:JSON.stringify(dataToSend),
         };
 
-        let JSONData=await fetch("http://localhost:4545/signup",reqOptions);
+        let JSONData=await fetch("/signup",reqOptions);
 
         let JSOData = await JSONData.json();
 
@@ -64,7 +64,7 @@ function Signup() {
             headers:myHeader,
             body:dataToSend,
         }
-        let JSONData=await fetch("http://localhost:4545/signup",reqOptions);
+        let JSONData=await fetch("/signup",reqOptions);
 
         let JSOData = await JSONData.json();
 
@@ -93,7 +93,7 @@ function Signup() {
             method:"POST",
             body:dataToSend,
         }
-        let JSONData=await fetch("http://localhost:4545/signUp",reqOptions);
+        let JSONData=await fetch("/signUp",reqOptions);
 
         let JSOData = await JSONData.json();
 

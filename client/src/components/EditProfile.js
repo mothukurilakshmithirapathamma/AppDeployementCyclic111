@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {Link} from "react-router-dom";
-import { useRef ,useState,useSelector} from 'react';
+import { useRef ,useState,} from 'react';
+import { useSelector } from 'react-redux';
 import TopNavigation from './TopNavigation';
 
 function EditProfile() {
@@ -30,7 +31,7 @@ function EditProfile() {
          emailInputRef.current.value=storeObj.userDetails.email;
          mobileNoInputRef.current.value=storeObj.userDetails.mobileNo;
 
-         setProfilePic(`http://localhost://4545/${storeObj.userDetails.profilePic}`);
+         setProfilePic(`/${storeObj.userDetails.profilePic}`);
     })
 
     
@@ -53,7 +54,7 @@ function EditProfile() {
             method:"PATCH",
             body:dataToSend,
         }
-        let JSONData=await fetch("http://localhost:4545/editProfile",reqOptions);
+        let JSONData=await fetch("/editProfile",reqOptions);
 
         let JSOData = await JSONData.json();
 
