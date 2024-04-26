@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const multer= require("multer");
 const jwt= require("jsonwebtoken");
+const path=require("node:path");
 const bcrypt= require("bcrypt");
 const dotenv=require("dotenv");
 dotenv.config();
@@ -25,6 +26,8 @@ const storage = multer.diskStorage({
  app.use(express.json());
  app.use(express.urlencoded());
  app.use('/uploads', express.static('uploads'));
+app.use(express.static(path.join(_dirname,"./client/build")));
+
 
  let authorize=(req,res,next)=>{
     console.log(req.headers.authorization);
