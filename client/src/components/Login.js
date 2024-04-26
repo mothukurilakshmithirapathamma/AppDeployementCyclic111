@@ -45,9 +45,7 @@ function Login() {
          console.log(JSONData);
       
          }
-      
-    
-  }
+       }
 
   let onLoginBtnClick=async()=>{
     
